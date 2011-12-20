@@ -103,7 +103,7 @@ Library
                    Application.HXournal.ModelAction.Select
                    Application.HXournal.ModelAction.File
                    Application.HXournal.ModelAction.Window
-                   Application.HXournal.ModelAction.Common
+                   -- Application.HXournal.ModelAction.Common
                    Application.HXournal.Coroutine.Callback
                    Application.HXournal.GUI
                    Application.HXournal.GUI.Menu
@@ -120,6 +120,7 @@ Library
                    Application.HXournal.Coroutine.File
                    Application.HXournal.Coroutine.Mode
                    Application.HXournal.Coroutine.Window
+                   Application.HXournal.Coroutine.Commit
                    Application.HXournal.Util
                    Application.HXournal.Util.Verbatim 
                    Application.HXournal.Draw
