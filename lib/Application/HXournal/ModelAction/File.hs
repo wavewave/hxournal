@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings, CPP #-}
 
 module Application.HXournal.ModelAction.File where
 
@@ -21,8 +21,10 @@ import Graphics.Xournal.Render.PDFBackground
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as C
 
+#ifdef POPPLER
 import qualified Graphics.UI.Gtk.Poppler.Document as Poppler
 import qualified Graphics.UI.Gtk.Poppler.Page as PopplerPage
+#endif 
 
 -- | get file content from xournal file and update xournal state 
 
@@ -71,6 +73,7 @@ constructNewHXournalStateFromXournal xoj xstate = do
 makeNewXojWithPDF :: FilePath -> IO (Maybe Xournal)
 makeNewXojWithPDF fp = do 
   let fname = C.pack fp 
+#ifdef POPPLER
   mdoc <- popplerGetDocFromFile fname
   case mdoc of 
     Nothing -> do 
@@ -87,7 +90,9 @@ makeNewXojWithPDF fp = do
       putStrLn $ "total num of pages " ++ show n 
       putStrLn $ "size = " ++ show (w,h)
       return (Just xoj)
-      
+#else
+  error "makeNewXojWithPDF : this cannot be done without poppler lib." 
+#endif    
       
 createPage :: Dimension -> B.ByteString -> Int -> Page
 createPage dim fn n 
